@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import trap.controller.TrapController;
 
 import java.util.Scanner;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -207,6 +206,20 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 								 TrapPanel.this.repaint();
 							 }
 						 });
+						 
+						 Thread thread = new Thread(new Runnable()
+						{
+							 @Override
+							 public void run()
+							 {
+								 baseController.waitfor2();
+							 }
+						 });
+						 
+						 thread.start();
+					
+						 
+						 
 						
 						
 		  		}
