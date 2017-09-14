@@ -212,7 +212,14 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 							 @Override
 							 public void run()
 							 {
-								 baseController.waitfor2();
+								 try
+									{
+									    Thread.sleep(15000);
+									} 
+									catch(InterruptedException ex) 
+									{
+									    Thread.currentThread().interrupt();
+									}
 							 }
 						 });
 						 

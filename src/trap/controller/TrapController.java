@@ -34,17 +34,7 @@ public class TrapController
 		return userCharacter;
 	}
 	
-	public void waitfor2()
-	{
-		try
-		{
-		    Thread.sleep(15000);
-		} 
-		catch(InterruptedException ex) 
-		{
-		    Thread.currentThread().interrupt();
-		}
-	}
+	
 	
 	
 }
