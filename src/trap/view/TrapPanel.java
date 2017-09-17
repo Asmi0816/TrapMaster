@@ -227,22 +227,34 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 						  thread.start();
 						 */
 						  
-						  try
+						 /* try
 							{
-							    Thread.sleep(150);
-							    SwingUtilities.invokeLater(new Runnable()
-								 {
-									 public void run()
-									 {
-										 TrapPanel.this.repaint();
-									 }
-								 });
+							    Thread.sleep(5);
+							   
 							} 
 							catch(InterruptedException ex) 
 							{
 							    Thread.currentThread().interrupt();
-							}
-						 
+							 }
+						 */
+						  
+						  Thread thread = new Thread(new Runnable() 
+							{
+								@Override
+								public void run() 
+								{
+									try
+									{
+										Thread.sleep(5);
+									}
+									catch(InterruptedException ex)
+									{
+										Thread.currentThread().interrupt();
+									}
+									
+								}
+							});
+							thread.start();
 						 
 						
 						
