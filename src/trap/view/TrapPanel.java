@@ -16,7 +16,7 @@ import java.awt.event.KeyListener;
 public class TrapPanel extends JPanel implements KeyListener, ActionListener
 {
 	private TrapController baseController;
-	private Timer gameTime;
+	private Timer gameTime, fallTime;
 	private Scanner keyBoard;
 	private SpringLayout baseLayout;
 	private JLabel backgroundLabel, characterLabel, exit, sandPlatform;
@@ -29,6 +29,7 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		gameTime = new Timer(5,this);
+		fallTime = new Timer(20, this);
 		keyBoard = new Scanner(System.in);
 		
 		backgroundLabel = new JLabel();
@@ -147,7 +148,7 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 		  int x = characterLabel.getX();
 		  
 		 
-		  
+		  // Simple arrow control scheme
 				  if(code == KeyEvent.VK_UP)
 				  {
 					  characterLabel.setLocation(x, y - 5);
@@ -178,88 +179,6 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 					  baseController.moveBox(x, y);
 				  }
 		  
-		  		while((baseController.getUserCharacter().getPlayer().intersects(baseController.getUserCharacter().getPlatformBox()) == false) && (characterLabel.getY() < 500))			
-		  		{
-		  				characterLabel.setLocation(x, y + 1);
-						y = characterLabel.getY();
-						x = characterLabel.getX();
-						baseController.moveBox(x, y);
-						
-						
-						  if(code == KeyEvent.VK_RIGHT)
-						  {
-							  characterLabel.setLocation(x+5, y);
-						  }
-						  else if(code == KeyEvent.VK_LEFT)
-						  {
-							  characterLabel.setLocation(x-5, y);
-						  }
-						  if(characterLabel.getY() == 500)
-						  {
-								System.out.println("Dead");
-						  }
-						  
-						
-						 // tried doing another thread but that didn't seem to do much better.
-						 /* Thread thread= new Thread(new Runnable()
-						  {
-							  @Override
-							  public void run()
-							  {
-								  try
-									{
-									    Thread.sleep(150);
-									    SwingUtilities.invokeLater(new Runnable()
-										 {
-											 public void run()
-											 {
-												 TrapPanel.this.repaint();
-											 }
-										 });
-									} 
-									catch(InterruptedException ex) 
-									{
-									    Thread.currentThread().interrupt();
-									}
-							  }
-						  });
-						  
-						  thread.start();
-						 */
-						  
-						 /* try
-							{
-							    Thread.sleep(5);
-							   
-							} 
-							catch(InterruptedException ex) 
-							{
-							    Thread.currentThread().interrupt();
-							 }
-						 */
-						  
-						  Thread thread = new Thread(new Runnable() 
-							{
-								@Override
-								public void run() 
-								{
-									try
-									{
-										Thread.sleep(5);
-									}
-									catch(InterruptedException ex)
-									{
-										Thread.currentThread().interrupt();
-									}
-									
-								}
-							});
-							thread.start();
-						 
-						
-						
-		  		}
-		  
 	}
 
 	
@@ -278,7 +197,22 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 	
 	public void actionPerformed(ActionEvent e) 
 	{
+		// Gets the characters labels location so that it has easy to use coordinates.
+		int y = characterLabel.getY();
+		int x = characterLabel.getX();
 		
+		
+		// Acts like an animation where it updates and repaints every 5 milliseconds. However right now the argument is being passed as null which needs to be fixed.
+  		if((baseController.getUserCharacter().getPlayer().intersects(baseController.getUserCharacter().getPlatformBox()) == false)
+  				&& (characterLabel.getY() < 500))			
+  		{
+  			//Changes character location falling down one every time the argument passes. Moving the hit box as well as the character.
+  				characterLabel.setLocation(x, y + 1);
+				y = characterLabel.getY();
+				x = characterLabel.getX();
+				baseController.moveBox(x, y);
+  		}
+  		//Updates the gui.
 		repaint();
 		
 	}
