@@ -198,19 +198,19 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		// Gets the characters labels location so that it has easy to use coordinates.
-		int y = characterLabel.getY();
-		int x = characterLabel.getX();
+		int newY = characterLabel.getY();
+		int newX = characterLabel.getX();
 		
 		
 		// Acts like an animation where it updates and repaints every 5 milliseconds. However right now the argument is being passed as null which needs to be fixed.
   		if((baseController.getUserCharacter().getPlayer().intersects(baseController.getUserCharacter().getPlatformBox()) == false)
-  				&& (characterLabel.getY() < 500))			
+  				&& (newY < 500))			
   		{
   			//Changes character location falling down one every time the argument passes. Moving the hit box as well as the character.
-  				characterLabel.setLocation(x, y + 1);
-				y = characterLabel.getY();
-				x = characterLabel.getX();
-				baseController.moveBox(x, y);
+  				characterLabel.setLocation(newX, newY + 1);
+				newY = characterLabel.getY();
+				newX = characterLabel.getX();
+				baseController.moveBox(newX, newY);
   		}
   		//Updates the gui.
 		repaint();
