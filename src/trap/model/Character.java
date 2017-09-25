@@ -9,15 +9,14 @@ public class Character
 	private Rectangle platformBox;
 	private TrapController baseController;
 	private int x;
-	
 	private int y;
 	
 	//constructor to guarantee that the hit boxes hit for now
 	public Character(TrapController baseController)
 	{
 		 this.baseController = baseController;
-		 player = new Rectangle(0, 0, 20, 20);
-		 platformBox = new Rectangle(0,0,20,20);
+		 player = new Rectangle(100, 50, 20, 20);
+		 platformBox = new Rectangle(100, 50, 20, 20);
 	}
 	
 	//This is the hit box that moves with your character
@@ -31,9 +30,10 @@ public class Character
 	//This is a location of a platform in the level. There will be more but not right now.
 	public void movePlatform(int locationX, int locationY)
 	{
-		
 		platformBox.setLocation(locationX, locationY);
 	}
+	
+	
 	public Rectangle getPlayer() {
 		return player;
 	}

@@ -16,7 +16,7 @@ import java.awt.event.KeyListener;
 public class TrapPanel extends JPanel implements KeyListener, ActionListener
 {
 	private TrapController baseController;
-	private Timer gameTime, fallTime;
+	private Timer gameTime;
 	private Scanner keyBoard;
 	private SpringLayout baseLayout;
 	private JLabel backgroundLabel, characterLabel, exit, sandPlatform;
@@ -29,7 +29,7 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		gameTime = new Timer(5,this);
-		fallTime = new Timer(20, this);
+		
 		keyBoard = new Scanner(System.in);
 		
 		backgroundLabel = new JLabel();
@@ -61,19 +61,23 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 	{
 		this.setLayout(baseLayout);
 		this.setPreferredSize(new Dimension(900, 600));
-		gameTime.start();
+	
 		this.addKeyListener(this);
 		this.setFocusable(true);
 		
 		this.add(characterLabel);
+		characterLabel.setVisible(false);
+		characterLabel.setIcon(charIcon);
+		
+		
 		this.add(sandPlatform);
 		sandPlatform.setVisible(false);
 		sandPlatform.setIcon(sandIcon);
+		
+		
 		this.add(exit);
 		exit.setVisible(false);
 		exit.setIcon(lvl3Icon);
-		characterLabel.setVisible(false);
-		
 		
 		this.add(startButton);
 		
@@ -82,11 +86,8 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 		backButton.setEnabled(false);
 		
 		this.add(backgroundLabel);
-		
-		
-		
 		backgroundLabel.setIcon(baseLabel);
-		characterLabel.setIcon(charIcon);
+		
 	}
 	
 	public void setupLayout()
@@ -116,11 +117,12 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 						backButton.setVisible(true);
 						backButton.setEnabled(true);
 						sandPlatform.setVisible(true);
-						sandPlatform.setLocation(0, 0);
+						
 						baseController.movePlatform(sandPlatform.getX(), sandPlatform.getY());
-						characterLabel.setLocation(100, 50);
+						
 						characterLabel.setVisible(true);
 						exit.setVisible(true);
+						gameTime.start();
 						
 						
 					}
