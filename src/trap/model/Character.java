@@ -15,8 +15,8 @@ public class Character
 	public Character(TrapController baseController)
 	{
 		 this.baseController = baseController;
-		 player = new Rectangle(100, 50, 20, 20);
-		 platformBox = new Rectangle(100, 50, 20, 20);
+		 player = new Rectangle(50, 300, 100, 100);
+		 platformBox = new Rectangle(25, 400, 40, 100);
 	}
 	
 	//This is the hit box that moves with your character

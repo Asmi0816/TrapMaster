@@ -34,8 +34,10 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 		
 		backgroundLabel = new JLabel();
 		characterLabel = new JLabel();
+		
 		exit = new JLabel();
 		sandPlatform = new JLabel();
+		
 		
 		
 		
@@ -100,8 +102,10 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 		baseLayout.putConstraint(SpringLayout.WEST, startButton, 200, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, startButton, -100, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, startButton, -700, SpringLayout.EAST, this);
-		
-		
+		baseLayout.putConstraint(SpringLayout.NORTH, characterLabel, 300, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, characterLabel, 50, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, sandPlatform, 400, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, sandPlatform, 25, SpringLayout.WEST, this);
 	}
 	
 	public void setupListeners()
@@ -117,9 +121,7 @@ public class TrapPanel extends JPanel implements KeyListener, ActionListener
 						backButton.setVisible(true);
 						backButton.setEnabled(true);
 						sandPlatform.setVisible(true);
-						
 						baseController.movePlatform(sandPlatform.getX(), sandPlatform.getY());
-						
 						characterLabel.setVisible(true);
 						exit.setVisible(true);
 						gameTime.start();
